@@ -5,15 +5,15 @@ start :-
     clear_knowledge_base,
     diagnosis(Disease),
     nl,
-    write('✅ Based on your symptoms, you may be suffering from: '), write(Disease), nl,
+    write('Based on your symptoms, you may be suffering from: '), write(Disease), nl,
     treatment(Disease),
     nl,
     clear_knowledge_base.
 
 start :-
     nl,
-    write('⚠️ We were unable to diagnose your disease.'), nl,
-    write('🙏 Please consult your doctor as soon as possible.'), nl,
+    write('We were unable to diagnose your disease.'), nl,
+    write('Please consult your doctor as soon as possible.'), nl,
     clear_knowledge_base.
 
 % Disease rules
@@ -61,25 +61,25 @@ diagnosis(dengue) :-
 
 % Treatments
 treatment(flu) :-
-    write('🩺 Recommended: Rest, drink fluids, take paracetamol, consult doctor if symptoms persist.').
+    write('Recommended: Rest, drink fluids, take paracetamol, consult doctor if symptoms persist.').
 
 treatment(typhoid) :-
-    write('🩺 Recommended: Antibiotics, hydration, and medical supervision.').
+    write('Recommended: Antibiotics, hydration, and medical supervision.').
 
 treatment(covid19) :-
-    write('🩺 Recommended: Isolate, rest, monitor oxygen levels, consult a physician.').
+    write('Recommended: Isolate, rest, monitor oxygen levels, consult a physician.').
 
 treatment(malaria) :-
-    write('🩺 Recommended: Antimalarial drugs and follow-up care.').
+    write('Recommended: Antimalarial drugs and follow-up care.').
 
 treatment(diabetes) :-
-    write('🩺 Recommended: Monitor blood sugar, balanced diet, regular medication.').
+    write('Recommended: Monitor blood sugar, balanced diet, regular medication.').
 
 treatment(hypertension) :-
-    write('🩺 Recommended: Reduce salt, stress management, exercise, prescribed medication.').
+    write('Recommended: Reduce salt, stress management, exercise, prescribed medication.').
 
 treatment(dengue) :-
-    write('🩺 Recommended: Maintain hydration, avoid painkillers like aspirin, rest, consult doctor.').
+    write('Recommended: Maintain hydration, avoid painkillers like aspirin, rest, consult doctor.').
 
 % Symptom handling
 has_symptom(Symptom) :-
