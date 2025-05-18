@@ -19,7 +19,7 @@ public class Main {
         }
 
         public int compareTo(Node other) {
-            return this.fCost - other.fCost;
+            return Integer.compare(this.fCost, other.fCost);
         }
     }
 
@@ -46,7 +46,8 @@ public class Main {
             int v = sc.nextInt();
             int cost = sc.nextInt();
             graph.get(u).add(new Edge(v, cost));
-            graph.get(v).add(new Edge(u, cost)); // Comment for directed graph
+            // Uncomment the next line for undirected graph
+            // graph.get(v).add(new Edge(u, cost));
         }
 
         // Input heuristic values
@@ -63,8 +64,12 @@ public class Main {
         System.out.print("Enter goal node: ");
         int goal = sc.nextInt();
 
-        // Run A* search
-        aStar(graph, h, start, goal);
+        // Validate start and goal
+        if (start < 0 || start >= n || goal < 0 || goal >= n) {
+            System.out.println("Invalid start or goal node.");
+        } else {
+            aStar(graph, h, start, goal);
+        }
 
         sc.close();
     }
@@ -90,15 +95,18 @@ public class Main {
             Node current = pq.poll();
             int u = current.vertex;
 
+            if (visited[u]) continue;
+            visited[u] = true;
+
+            // Uncomment to debug:
+             System.out.println("Visiting Node " + u + " with f = " + f[u] + ", g = " + g[u]);
+
             if (u == goal) {
                 System.out.println("Path found:");
                 printPath(parent, goal);
                 System.out.println("\nTotal cost: " + g[goal]);
                 return;
             }
-
-            if (visited[u]) continue;
-            visited[u] = true;
 
             for (Edge edge : graph.get(u)) {
                 int v = edge.to;
@@ -123,42 +131,65 @@ public class Main {
     }
 }
 
-/*Input1:
+
+/*Input 1
 4
 4
-0 1 1  
-0 2 3  
-1 3 5  
-2 3 2  
+0 1 1
+0 2 3
+1 3 5
+2 3 2
 4
 5
 2
 0
 0
-3
- */
+3*/
 
-/* Input 2:
+/* Input ( No Path Found)
 3
-2
-0 1 1
-1 2 1
-2
 1
+0 1 1
+5
+3
+0
 0
 0
 2
 */
 
-/*Input 3:
+/*Input 2
+5
+4
+0 1 2
+1 2 2
+2 3 2
+3 4 2
+7
+5
 3
-1
-0 1 1 
-1
-0
-0
-0
-0
 2
+0
+0
+4
+*/
 
- */
+/*Input 3
+6
+7
+0 1 1
+0 2 4
+1 3 1
+2 3 1
+1 4 6
+4 5 1
+3 5 2
+10
+6
+4
+2
+1
+0
+0
+5
+*/
